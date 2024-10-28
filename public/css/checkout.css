@@ -1,0 +1,76 @@
+/* checkout.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.checkout-container {
+    max-width: 500px;
+    margin: 2em auto;
+    background-color: #fff;
+    padding: 2em;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+  justify-content: center;
+  display: flex;
+  
+}
+
+.checkout-container h2 {
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.form-group {
+    margin-bottom: 1em;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5em;
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.place-order-button {
+    background-color: #4CAF50;
+    color: white;
+    padding-top: 5px;
+    padding: 0.75em 1.5em;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1em;
+    position: relative;
+    bottom: 10;
+}
+
+
+
+
+.left-block  {
+   width: 300px; /* Make each block take 45% of the container width */
+    padding: 10px;
+    justify-self: center;
+}
+
+.right-block{
+    width: 45%; /* Make each block take 45% of the container width */
+    padding: 10px;
+    justify-self: center;
+}
+
+/* Adjust this for smaller screen sizes */
+@media (max-width: 768px) {
+    .checkout-container {
+        flex-direction: column; /* Stacks the blocks vertically on smaller screens */
+}
+}

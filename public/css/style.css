@@ -1,0 +1,53 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.slider {
+    position: relative;
+    max-width: 100%;
+    margin: auto;
+    overflow: hidden;
+    height: auto;
+}
+
+.slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slides img {
+    width: 100%;
+    height:fit-content;
+    flex-shrink: 0; /* Prevents images from shrinking */
+}
+
+/* Navigation buttons */
+button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 100;
+}
+
+.prev {
+    left: 0;
+}
+
+.next {
+    right: 0;
+}
+
+/* Optional: Responsive design for smaller screens */
+@media (max-width: 768px) {
+    button {
+        padding: 8px;
+    }
+}

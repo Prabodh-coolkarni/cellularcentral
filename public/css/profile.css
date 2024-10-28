@@ -1,0 +1,117 @@
+/* Basic Flexbox and Styling */
+.profile-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 50px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-sidebar {
+    flex: 1;
+    max-width: 300px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profile-sidebar a{
+    text-decoration: none;
+}
+
+.profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.profile-name {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.profile-email {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.settings-btn, .logout-btn {
+    display: block;
+    width: 50%;
+    position: relative;
+    right: 60px;
+    margin-top: 5px;
+    padding: 8px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.settings-btn:hover, .logout-btn:hover {
+    background-color: #0056b3;
+}
+
+.profile-details {
+    flex: 2;
+    margin-left: 30px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profile-details h3 {
+    margin-bottom: 20px;
+    font-size: 1.75em;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.detail-item label {
+    font-weight: bold;
+    color: #333;
+}
+
+.detail-item span {
+    color: #555;
+}
+
+/*magnifying glass*/
+.btn2{
+    background-color: transparent;
+    display: flexbox;
+}
+
+
+.btn-or{
+    display: block;
+    width: 55%;
+    position: relative;
+    text-size-adjust: 18%;
+    right: -73px;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.fa-magnifying-glass{
+    color: #ffffff;
+}
