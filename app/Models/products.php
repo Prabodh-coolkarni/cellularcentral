@@ -38,5 +38,9 @@ class products extends Model
             'Gallery',
             'Price',
     ];
+    public function setGalleryAttribute($value)
+{
+    $this->attributes['Gallery'] = is_array($value) ? json_encode($value):$value;
+}
    
 }

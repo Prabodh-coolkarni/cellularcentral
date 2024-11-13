@@ -1,4 +1,4 @@
-
+/* Base Styles */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -7,10 +7,13 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
+    padding: 0;
 }
-main{
+
+main {
     padding-top: 70px;
 }
+
 .container {
     background-color: white;
     padding: 3em;
@@ -21,6 +24,7 @@ main{
     height: auto;
 }
 
+/* Typography */
 h1 {
     margin-bottom: 1.5em;
     color: #333;
@@ -45,7 +49,8 @@ input[type="password"] {
     border-radius: 5px;
 }
 
-button {
+/* Button Styles */
+.login {
     width: 100%;
     padding: 0.5em;
     background-color: #007bff;
@@ -56,7 +61,7 @@ button {
     font-size: 1em;
 }
 
-button:hover {
+.login:hover {
     background-color: #0056b3;
 }
 
@@ -74,65 +79,135 @@ button:hover {
     text-decoration: underline;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-
+/* Header */
 header {
     font-family: Georgia, 'Times New Roman', Times, serif;
     background: #000305;
     color: white;
     padding: 10px 0;
     position: fixed;
-    top: 0px;
+    top: 0;
     width: 100%;
-   
+    z-index: 1000;
 }
 
-.navbar {
+/* Navbar and Search Container */
+.navbar, .search-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;  
+    padding: 0 20px;
+    flex-wrap: wrap;
+}
+
+.search-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    flex-wrap: wrap;
+}
+.search-btn{
+    position: relative;
+    transform: translateY(-50%);
+    right: -1px;
+    top: 12px;
+    color: white;
+    background-color: black;
+    float: right;
+  display: flex;
 }
 
 .navbar .logo {
     font-size: 50px;
+    white-space: nowrap;
 }
 
 .nav-links {
     list-style: none;
     display: flex;
     gap: 15px;
+    flex-wrap: wrap;
 }
 
 .nav-links a {
     color: white;
     text-decoration: none;
+    white-space: nowrap;
 }
 
 #search {
     padding: 5px;
     border: none;
     border-radius: 5px;
+    min-width: 100px;
 }
 
-.hero {
-    padding: 5px;
-    text-align: center;
+/* Animation */
+@keyframes pop {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    70% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
-.icon{
-    align-items: flex-end;
- }
+/* Responsive Styles */
+@media (max-width: 1024px) {
+    .navbar .logo {
+        font-size: 40px;
+    }
+    .container {
+        width: 90%;
+        max-width: 500px;
+        padding: 2em;
+    }
+}
 
+@media (max-width: 768px) {
+    .navbar .logo {
+        font-size: 35px;
+    }
+    .nav-links {
+        gap: 10px;
+    }
+    .search-container {
+        flex-wrap: wrap;
+    }
+    #search {
+        width: auto;
+        margin-top: 10px;
+    }
+    main {
+        padding-top: 100px; /* Increase padding to prevent overlap */
+    }
+}
 
-.admin{
-    display: flexbox;
-    position: relative;
-    top: -190px;
-    right: -750px;
+@media (max-width: 480px) {
+    .navbar .logo {
+        font-size: 30px;
+    }
+    .nav-links {
+        gap: 5px;
+    }
+    #search {
+        width: 100%;
+        margin-top: 10px;
+    }
+    .container {
+        width: 90%;
+        max-width: 300px;
+        padding: 1.5em;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    main {
+        padding-top: 120px; /* Further increase for smaller screens */
+    }
 }

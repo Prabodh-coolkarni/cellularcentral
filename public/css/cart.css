@@ -5,11 +5,18 @@
     box-sizing: border-box;
 }
 
+
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f1f1f1;
-    color: #333;
-    line-height: 1.6;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background: #000305;
+    color: white;
+    padding: 10px 0;
 }
 
 
@@ -125,4 +132,22 @@ body {
     position: relative;
    right: -1150px;
     
+}
+
+.search-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    flex-wrap: wrap;
+}
+.search-btn{
+    position: relative;
+    transform: translateY(-50%);
+    right: -1px;
+    top: 12px;
+    color: white;
+    background-color: black;
+    float: right;
+  display: flex;
 }

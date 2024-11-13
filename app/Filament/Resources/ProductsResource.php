@@ -44,14 +44,15 @@ class ProductsResource extends Resource
                 Forms\Components\TextInput::make('Camera_b')->nullable(),
                 Forms\Components\TextInput::make('Battery')->nullable(),
                 Forms\Components\TextInput::make('Price')->required(),
-                Forms\Components\FileUpload::make('Gallery')->image()
-                ->directory('images')
+                Forms\Components\FileUpload::make('Gallery')->image()->directory('images')
                 ->required()
                 ->multiple()
-                ->minFiles(2)
-                ->maxFiles(6),
-                
-          
+                ->minFiles(1)
+                ->maxFiles(5)
+                ->preserveFilenames()
+                ->imagePreviewHeight(100),
+              
+
             ]);
     }
 
@@ -74,7 +75,13 @@ class ProductsResource extends Resource
                     Tables\Columns\TextColumn::make('Camera_b'),
                     Tables\Columns\TextColumn::make('Battery'),
                     Tables\Columns\TextColumn::make('Price'),
-                    Tables\Columns\ImageColumn::make('Gallery'),
+                    Tables\Columns\ImageColumn::make('Gallery')
+                    ->getStateUsing(function ($record) {
+                        $images = json_decode($record->images, true);
+                        return $images ? asset('storage/' . $images[0]) : null;
+                    })
+                    ->width(50)
+                ->height(50),
                     // ...
             ])
             ->filters([

@@ -9,41 +9,74 @@ header {
     background: #000305;
     color: white;
     padding: 10px 0;
-   
 }
 
-.btn{
-    position: relative;
-    top: 12px;
+.btn {
+    position: absolute;
+    transform: translateY(-50%);
+    right: -15px;
     float: right;
+   display: flex;
 }
 
+
+
+
+/* Define the pop animation */
+@keyframes pop {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    70% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.search-container{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    flex-wrap: wrap; /* Allows items to wrap if space is limited */
+
+}
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
+    flex-wrap: wrap; /* Allows items to wrap if space is limited */
 }
 
 .navbar .logo {
     font-size: 50px;
+    white-space: nowrap; /* Prevents logo from breaking into multiple lines */
 }
 
 .nav-links {
     list-style: none;
     display: flex;
     gap: 15px;
+    flex-wrap: wrap; /* Wraps items to the next line if screen is too small */
 }
 
 .nav-links a {
     color: white;
     text-decoration: none;
+    white-space: nowrap; /* Prevents text from breaking into multiple lines */
 }
 
 #search {
     padding: 5px;
     border: none;
     border-radius: 5px;
+    min-width: 100px;
 }
 
 .hero {
@@ -51,8 +84,9 @@ header {
     text-align: center;
 }
 
-.icon{
-   align-items: flex-end;
+.icon {
+    align-items: flex-end;
+    font-size: 18px;
 }
 
 footer {
@@ -64,5 +98,36 @@ footer {
     width: 100%;
     height: min-content;
     bottom: 0;
-    
+}
+
+/* Responsive Styles */
+
+@media (max-width: 768px) {
+    .navbar .logo {
+        font-size: 35px;
+    }
+
+    .nav-links {
+        gap: 10px;
+    }
+
+    #search {
+        width: auto;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar .logo {
+        font-size: 30px;
+    }
+
+    .nav-links {
+        gap: 5px;
+    }
+
+    #search {
+        width: 100%;
+        margin-top: 10px;
+    }
 }

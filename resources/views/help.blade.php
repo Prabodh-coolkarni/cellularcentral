@@ -28,6 +28,9 @@
             <label for="message">Message:</label>
             <textarea id="message" name="message" rows="4" required></textarea>
 
+             <!-- Capture the previous URL -->
+             <input type="hidden" name="previous_url" value="{{ url()->previous() }}">
+
             <input type="submit" value="Submit">
         </form>
     </div>

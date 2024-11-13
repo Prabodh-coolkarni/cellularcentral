@@ -35,7 +35,7 @@ class OrdersResource extends Resource
                 Tables\Columns\TextColumn::make('product_id'),
                 Tables\Columns\TextColumn::make('user_id'),
                 Tables\Columns\TextColumn::make('quantity'),
-                Tables\Columns\TextColumn::make('address'),
+                Tables\Columns\TextColumn::make('Address'),
                 Tables\Columns\TextColumn::make('status'),
                 Tables\Columns\TextColumn::make('payment_method'),
                 Tables\Columns\TextColumn::make('payment_status'),

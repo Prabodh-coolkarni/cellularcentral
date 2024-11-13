@@ -1,3 +1,11 @@
+<?php
+
+use App\Http\Controllers\ProductController as ControllersProductController;
+if(!Auth::check())
+$total=0;
+else
+$total=ControllersProductController::cartcount();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,14 +14,18 @@
     <title>Savita Mobiles</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+   <link rel="stylesheet" href="{{asset('css/cartcount.css')}}">
     <link rel="stylesheet" href="{{asset('css/styles.css')}}">
     <link rel="stylesheet" href="{{asset('css/orderlist.css')}}">
+    <link rel="stylesheet" href="{{asset('css/popup.css')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
-
-
 </head>
 <body>
+@if(session('message'))
+<div class="popup-message">
+    {{ session('message') }}
+</div>
+@endif
 <header>
         <nav class="navbar">
             <div class="logo">SM Cellular Central</div>
@@ -25,23 +37,28 @@
                 <li><a href="{{route('register')}}">Sign Up</a></li>
                 @endif
                 <li><a href="{{route('profile')}}"><i class="icon fa-solid fa-user-large"></i></a></li>
-                <li><a href="{{route('cartlist')}}"><i class=" icon fa-solid fa-cart-shopping"></i></a></li>
-                
+                <li><a href="{{route('cartlist')}}"><i class=" icon fa-solid fa-cart-shopping"></i> @if(Auth::check())<span class="cart-count">{{ $total }}</span>@endif</a></li>   
             </ul>
+            <div class="search-container">
             <form action="search" method="get">
             <input type="text" id="search"  name="query" placeholder="Search...">
-             <button class=" btn fa-solid fa-magnifying-glass" type="submit" ></button>
+             <button class="btn fa-solid fa-magnifying-glass" type="submit" ></button>
             </form>
+            </div>
         </nav>
     </header>
 
-     <!-- Cart Section -->
+     <!-- orders Section -->
      <h2>Your orders</h2>
     <section class="cart-container">
         <div class="cart-items">
         @foreach($orders as $item)
         <div class="cart-item">
+            @if($item->first_image)
                 <img src="{{asset('storage/'.$item->first_image)}}" alt="iPhone 14">
+            @else
+            <p>image not available</p>
+            @endif
                 <h3>{{$item->name}}</h3>
                 <br>
                 <p>payment status:{{$item->payment_status}}<br>
@@ -57,6 +74,13 @@
         @endforeach
         </div>   
     </section>
-
+    <script>
+    setTimeout(function() {
+        var popup = document.querySelector('.popup-message');
+        if (popup) {
+            popup.style.display = 'none';
+        }
+    }, 3000); // 3000ms = 3 seconds
+</script>
 </body>
 </html>

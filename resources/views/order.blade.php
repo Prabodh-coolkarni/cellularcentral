@@ -1,3 +1,12 @@
+<?php
+
+use App\Http\Controllers\ProductController as ControllersProductController;
+if(!Auth::check())
+$total=0;
+else
+$total=ControllersProductController::cartcount();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,11 +18,18 @@
     <link rel="stylesheet" href="{{asset('css/styles.css')}}">
     <link rel="stylesheet" href="{{asset('css/checkout.css')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('css/cartcount.css')}}">
+    <link rel="stylesheet" href="{{asset('css/popup.css')}}">
     <script defer src="{{asset('js/script.js')}}"></script>
     <script defer src="{{asset('js/scripts.js')}}"></script>
 
 </head>
 <body>
+@if(session('message'))
+<div class="popup-message">
+    {{ session('message') }}
+</div>
+@endif
     <!-- Header -->
     <header>
         <nav class="navbar">
@@ -26,12 +42,14 @@
                 <li><a href="{{route('register')}}">Sign Up</a></li>
                 @endif
                 <li><a href="{{route('profile')}}"><i class="icon fa-solid fa-user-large"></i></a></li>
-                <li><a href="{{route('cartlist')}}"><i class=" icon fa-solid fa-cart-shopping"></i></a></li>
+                <li><a href="{{route('cartlist')}}"><i class=" icon fa-solid fa-cart-shopping"></i> @if(Auth::check())<span class="cart-count">{{ $total }}</span>@endif</a></li>
             </ul>
+            <div class="search-container">
             <form action="search" method="get">
             <input type="text" id="search"  name="query" placeholder="Search...">
-             <button class=" btn fa-solid fa-magnifying-glass" type="submit" ></button>
+             <button class="btn fa-solid fa-magnifying-glass" type="submit" ></button>
             </form>
+            </div>
         </nav>
     </header>
     
@@ -40,8 +58,11 @@
     <section class="checkout-container">
         <div class="right-block">
             <h2>order summary</h2>
+                @if($product->first_image)
+                <img src="{{asset('storage/'.$product->first_image)}}" alt="product"> 
+               @endif
             <p>product name:{{$product->name}}</p>
-            <p>price:{{$product->price}}</p>
+            <p>price:{{$product->Price}}</p>
         </div>
     </section>
    
@@ -49,7 +70,7 @@
     <section class="checkout-container">
         <div class="left-block">
         <h2>Checkout</h2>
-        <form id="checkout-form"  action="orderplace"  method="post">
+        <form id="checkout-form"  action="singleorderplace"  method="post">
             @csrf
             <div class="form-group">
                 <label for="name">Full Name:</label>
@@ -68,8 +89,11 @@
                 <select id="payment-method" name="paymentmethod" required>
                     <option value="cash-on-delivery" name="paymentmethod">Cash on Delivery</option>
                 </select>
+                <input type="hidden" name="product_id" value="{{$product->id}}">
+                <input type="hidden" name="quantity" value="{{$quantity}}">
             </div>
-
+            <!-- Capture the previous URL -->
+            <input type="hidden" name="previous_url" value="{{ url()->previous() }}">
             <div>
             <button type="submit" class="place-order-button">Place Order</button>
             </div>
@@ -77,12 +101,14 @@
         </div>
     </section>
 
-
-
-    
- 
-
-    <script src="/js/checkout.js"></script>
+    <script>
+    setTimeout(function() {
+        var popup = document.querySelector('.popup-message');
+        if (popup) {
+            popup.style.display = 'none';
+        }
+    }, 3000); // 3000ms = 3 seconds
+</script>
 </body>
 </html>
 

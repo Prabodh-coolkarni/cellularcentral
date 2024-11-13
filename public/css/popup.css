@@ -1,0 +1,19 @@
+.popup-message {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color:lightslategray; /* Light green background */
+    color:white; /* Dark green text */
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    font-size: 16px;
+    z-index: 1000;
+}
+
+.popup-message{
+    margin-left: 10px;
+    color:white;
+    font-weight: bold;
+    font-size: 20px;
+}

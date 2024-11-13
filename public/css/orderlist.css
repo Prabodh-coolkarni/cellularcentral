@@ -6,10 +6,16 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f1f1f1;
-    color: #333;
-    line-height: 1.6;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background: #000305;
+    color: white;
+    padding: 10px 0;
 }
 
 
