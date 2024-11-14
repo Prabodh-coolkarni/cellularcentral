@@ -77,10 +77,17 @@ $total=ControllersProductController::cartcount();
 
                         <div class="product-details">
                             <h3>Specefications</h3>
-                            <h4>name:{{$mobile->name}}</h4>  <p>version:{{$mobile->Version}}</p>
-                             <p>camera:{{$mobile->Camera_f}}</p>
-                            <p>camera:{{$mobile->Camera_b}}<p>  <p>Processor:{{$mobile->Processor}}</p>
-                            <p>Display size:{{$mobile->Display_Size}}</p>      
+                            <h4>name:{{$mobile->name}}</h4>
+                            @if(!empty($mobile->Brand))<p>Brand:{{$mobile->Brand}}</p>@endif
+                            @if(!empty($mobile->Model))<p>Model:{{$mobile->Model}}</p>@endif  
+                            @if(!empty($mobile->Version))<p>Version:{{$mobile->Version}}</p>@endif
+                            @if(!empty($mobile->Processor))<p>Processor:{{$mobile->Processor}}</p>@endif
+                            @if(!empty($mobile->ROM))<p>ROM:{{$mobile->ROM}}</p>@endif
+                            @if(!empty($mobile->Display_Size))<p>Display_Size:{{$mobile->Display_Size}}</p>@endif
+                            @if(!empty($mobile->Camera_f))<p>Front Camera:{{$mobile->Camera_f}}</p>@endif
+                            @if(!empty($mobile->Camera_b))<p>Back Camera:{{$mobile->Camera_b}}</p>@endif
+                            @if(!empty($mobile->Battery))<p>Battery:{{$mobile->Battery}}</p>@endif
+                            @if(!empty($mobile->Color))<p>Colors:{{$mobile->Color}}</p>@endif
                         </div>
                         <span class="divider"></span>
 

@@ -192,6 +192,11 @@ header {
     background-color: #001d4d;
 }
 
+.accessory-button.active {
+    background-color: #002366; 
+    color: white;
+}
+
 /* Product List Styles */
 .product-list {
     padding: 20px;

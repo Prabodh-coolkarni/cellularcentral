@@ -38,7 +38,7 @@ class ProductsResource extends Resource
                 Forms\Components\TextInput::make('Processor')->nullable(),
                 Forms\Components\TextInput::make('RAM')->nullable(),
                 Forms\Components\TextInput::make('ROM')->nullable(),
-                Forms\Components\TextInput::make('color')->required(),
+                Forms\Components\TextInput::make('Color')->required(),
                 Forms\Components\TextInput::make('Display_Size')->nullable(),
                 Forms\Components\TextInput::make('Camera_f')->nullable(),
                 Forms\Components\TextInput::make('Camera_b')->nullable(),
@@ -51,7 +51,6 @@ class ProductsResource extends Resource
                 ->maxFiles(5)
                 ->preserveFilenames()
                 ->imagePreviewHeight(100),
-              
 
             ]);
     }

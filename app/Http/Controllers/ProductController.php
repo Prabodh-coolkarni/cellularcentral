@@ -9,6 +9,7 @@ use App\Models\cart;
 use App\Models\order;
 use Illuminate\support\Facades\Auth;
 use Illuminate\support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 
 class ProductController extends Controller
@@ -26,9 +27,17 @@ class ProductController extends Controller
   }
 
     // Apply price filter if set in the request
-    if ($request->filled('price-range')) {
-     $query->where('price', '<=', $request->input('price-range'));
-    }
+     // Apply price filter if set in the request
+     if ($request->filled('price-range')) {
+      // Get the price range from the input and format it with commas
+      $priceRange = number_format((int) $request->input('price-range'));
+  
+      // Log to check the formatted price range for debugging
+      \Log::info("Formatted price range: " . $priceRange);
+  
+      // Modify the query to select prices as strings (matching database format)
+      $query->whereRaw("REPLACE(price, ',', '') <= ?", [(int) str_replace(',', '', $priceRange)]);
+  }
    $data=$query->get()->map(function($product){
       $Gallery=json_decode($product->Gallery);
       $product->first_image=$Gallery[0]??null;
@@ -52,8 +61,17 @@ class ProductController extends Controller
 
     // Apply price filter if set in the request
     if ($request->filled('price-range')) {
-     $query->where('price', '<=', $request->input('price-range'));
+      // Get the price range from the input and format it with commas
+      $priceRange = number_format((int) $request->input('price-range'));
+  
+      // Log to check the formatted price range for debugging
+      \Log::info("Formatted price range: " . $priceRange);
+  
+      // Modify the query to select prices as strings (matching database format)
+      $query->whereRaw("REPLACE(price, ',', '') <= ?", [(int) str_replace(',', '', $priceRange)]);
     }
+  
+  
    $data=$query->get()->map(function($product){
       $Gallery=json_decode($product->Gallery);
       $product->first_image=$Gallery[0]??null;
@@ -62,7 +80,7 @@ class ProductController extends Controller
      return view('Tabs',['tabs'=>$data]);
   }
 
-  
+  //function for displaying watches
   function index_watch(request $request)
   {
    // Initialize query for accessories
@@ -73,10 +91,17 @@ class ProductController extends Controller
       $query->where('brand', $request->input('brand'));
   }
 
-    // Apply price filter if set in the request
-    if ($request->filled('price-range')) {
-     $query->where('price', '<=', $request->input('price-range'));
-    }
+     // Apply price filter if set in the request
+     if ($request->filled('price-range')) {
+     // Get the price range from the input and format it with commas
+     $priceRange = number_format((int) $request->input('price-range'));
+
+     // Log to check the formatted price range for debugging
+     \Log::info("Formatted price range: " . $priceRange);
+
+     // Modify the query to select prices as strings (matching database format)
+      $query->whereRaw("REPLACE(price, ',', '') <= ?", [(int) str_replace(',', '', $priceRange)]);
+   }
    $data=$query->get()->map(function($product){
       $Gallery=json_decode($product->Gallery);
       $product->first_image=$Gallery[0]??null;
@@ -85,6 +110,7 @@ class ProductController extends Controller
      return view('watches',['watches'=>$data]);
   }
 
+  //function for displaying accessaries
   function index_acc(Request $request)
   {
    // Initialize query for accessories
@@ -97,8 +123,21 @@ class ProductController extends Controller
 
   // Apply price filter if set in the request
   if ($request->filled('price-range')) {
-   $query->where('price', '<=', $request->input('price-range'));
+    // Get the price range from the input and format it with commas
+    $priceRange = number_format((int) $request->input('price-range'));
+
+    // Log to check the formatted price range for debugging
+    \Log::info("Formatted price range: " . $priceRange);
+
+    // Modify the query to select prices as strings (matching database format)
+    $query->whereRaw("REPLACE(price, ',', '') <= ?", [(int) str_replace(',', '', $priceRange)]);
   }
+
+  // Apply accessory filter if set in the request
+  if ($request->filled('accessory')) {
+    $query->where('description', $request->input('accessory'));
+}
+
    $data=$query->get()->map(function($product){
     $Gallery=json_decode($product->Gallery);
     $product->first_image=$Gallery[0]??null;
@@ -117,11 +156,18 @@ class ProductController extends Controller
     //searching function 
     function search(request $request){
       $searchTerm = $request->input('query');
-      $query = Products::where(function ($q) use ($searchTerm) {
-          $q->where('name', 'like', '%' . $searchTerm . '%')
-            ->orWhere('description', 'like', '%' . $searchTerm . '%')
-            ->orWhere('category', 'like', '%' . $searchTerm . '%'); // Add other fields here as needed
-      });
+     $keywords = explode(' ', $searchTerm); // Split into words for broader matching
+
+     $query = Products::where(function ($q) use ($keywords) {
+    foreach ($keywords as $keyword) {
+        $q->where(function ($subQ) use ($keyword) {
+            $subQ->where('name', 'like', '%' . $keyword . '%')
+                 ->orWhere('description', 'like', '%' . $keyword . '%')
+                 ->orWhere('category', 'like', '%' . $keyword . '%');
+        });
+     }
+   });
+
         
          //Apply brand filter if set in the request
         if ($request->filled('brand')) {
@@ -210,9 +256,9 @@ class ProductController extends Controller
     ->join('products','cart.product_id','products.id')
     ->select('products.*','cart.id as cart_id')
     ->where('cart.user_id',$user_id)
-    ->sum('products.price'); 
+    ->sum(DB::raw('products.Price')); 
     
-    return view('checkout',['total'=>$total]);
+    return view('checkout',['carttotal'=>$total]);
 }
 
 //checkout page function

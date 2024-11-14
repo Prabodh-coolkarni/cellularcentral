@@ -59,12 +59,16 @@ $total=ControllersProductController::cartcount();
                 <option value="samsung" {{ request('brand') == 'samsung' ? 'selected' : '' }}>Samsung</option>
                 <option value="vivo" {{ request('brand') == 'vivo' ? 'selected' : '' }}>Vivo</option>
                 <option value="oneplus" {{ request('brand') == 'oneplus' ? 'selected' : '' }}>OnePlus</option>
+                <option value="realme" {{ request('brand') == 'realme' ? 'selected' : '' }}>realme</option>
+                <option value="oppo" {{ request('brand') == 'oppo' ? 'selected' : '' }}>oppo</option>
+                <option value="Xiaomi" {{ request('brand') == 'Xiaomi' ? 'selected' : '' }}>Xiaomi</option>
+                <option value="Redmi" {{ request('brand') == 'Redmi' ? 'selected' : '' }}>Redmi</option>
             </select>
         </div>
 
         <div class="filter-group">
             <label for="price-range">Price Range:</label>
-            <input type="range" id="price-range" name="price-range" min="999" max="150000" step="50" 
+            <input type="range" id="price-range" name="price-range" min="999" max="200000" step="50" 
                    value="{{ request('price-range', 1000) }}" 
                    oninput="document.getElementById('price-value').textContent = this.value;">
             <span id="price-value">{{ request('price-range', 10000) }}</span>

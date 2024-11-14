@@ -55,7 +55,8 @@ $total=ControllersProductController::cartcount();
     <section class="checkout-container">
         <div class="right-block">
             <h2>order summary</h2>
-            <p>price:{{$total}}</p>
+            <p>Total items:{{$total}}</p>
+            <p>Total price:{{$carttotal}}</p>
         </div>
     </section>
    
