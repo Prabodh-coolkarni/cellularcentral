@@ -55,14 +55,17 @@ $total=ControllersProductController::cartcount();
         @foreach($orders as $item)
         <div class="cart-item">
             @if($item->first_image)
-                <img src="{{asset('storage/'.$item->first_image)}}" alt="iPhone 14">
+               <a href="Details/{{$item->product_id}}"> <img src="{{asset('storage/'.$item->first_image)}}" alt="iPhone 14"></a>
             @else
             <p>image not available</p>
             @endif
                 <h3>{{$item->name}}</h3>
                 <br>
                 <p>payment status:{{$item->payment_status}}<br>
-                   payment method:{{$item->payment_method}}
+                   payment method:{{$item->payment_method}}<br>
+                   Delivery  at:{{$item->Address}}<br>
+                   Quantity:{{$item->quantity}}<br>
+                   order placed:{{$item->created_at}}
                 </p>
              
                 <br>

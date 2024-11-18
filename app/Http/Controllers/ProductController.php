@@ -26,7 +26,7 @@ class ProductController extends Controller
       $query->where('brand', $request->input('brand'));
   }
 
-    // Apply price filter if set in the request
+    
      // Apply price filter if set in the request
      if ($request->filled('price-range')) {
       // Get the price range from the input and format it with commas

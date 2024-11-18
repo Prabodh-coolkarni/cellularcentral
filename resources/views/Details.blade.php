@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\ProductController as ControllersProductController;
 if(!Auth::check())
 $total=0;
